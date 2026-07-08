@@ -104,3 +104,45 @@ feat/campus-market
 C:\Users\木\Desktop\proj_vue\202339070157沈凡栋前端框架技术期末项目.zip
 C:\Users\木\Desktop\proj_vue\202339070157沈凡栋前端框架技术期末项目报告.docx
 ```
+
+## 2026-07-08 UI 升级记录
+
+### 已完成
+
+1. 使用 Product Design 工作流重新审视当前项目 UI。
+2. 将页面从课程 demo 风格升级为更成熟的校园交易平台风格。
+3. 优化公共导航，新增品牌标识、深色顶部栏和图标导航。
+4. 优化商品列表页，新增专业筛选栏、结果统计和稳定商品卡片尺寸。
+5. 优化商品卡片，使用真实商品图片、成色标签、价格和地点信息。
+6. 优化商品详情页，使用真实商品图片和更清晰的信息卡片。
+7. 同步刷新项目报告截图和 Word 报告。
+8. 重新生成最终压缩包。
+
+### 验证记录
+
+1. `npm run build` 执行成功。
+2. 当前商品列表页视觉检查通过，商品卡片尺寸稳定。
+3. 完整流程验证通过：
+
+```text
+注册 -> 登录 -> 商品搜索 -> 商品详情 -> 收藏商品 -> 发布商品 -> 个人中心 -> 退出登录
+```
+
+4. 浏览器控制台错误为空。
+
+### 变更文件
+
+```text
+src/styles/base.css
+src/components/AppHeader.vue
+src/components/ProductCard.vue
+src/components/ProductFilter.vue
+src/views/HomeView.vue
+src/views/ProductListView.vue
+src/views/ProductDetailView.vue
+src/data/products.js
+package.json
+package-lock.json
+docs/report-assets/*
+202339070157沈凡栋前端框架技术期末项目报告.docx
+```

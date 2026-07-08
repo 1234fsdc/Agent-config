@@ -27,10 +27,18 @@ const filteredProducts = computed(() =>
 </script>
 
 <template>
-  <section class="page-section">
-    <p class="eyebrow">商品中心</p>
-    <h1>商品列表</h1>
-    <p class="muted-text">浏览校园闲置物品，可按关键词和分类筛选。</p>
+  <section class="page-section product-page">
+    <div class="market-toolbar">
+      <div>
+        <p class="eyebrow">商品中心</p>
+        <h1>发现校内好物</h1>
+        <p class="muted-text">浏览校园闲置物品，可按关键词和分类筛选。</p>
+      </div>
+      <div class="market-stat">
+        <strong>{{ filteredProducts.length }}</strong>
+        <span>当前结果</span>
+      </div>
+    </div>
 
     <ProductFilter v-model:keyword="keyword" v-model:category="category" />
 

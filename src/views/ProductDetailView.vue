@@ -11,6 +11,16 @@ const userStore = useUserStore()
 const message = ref('')
 
 const product = computed(() => productStore.getProductById(route.params.id))
+const categoryImages = {
+  书籍资料:
+    'https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1200&q=80',
+  电子数码:
+    'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
+  生活用品:
+    'https://images.unsplash.com/photo-1616627451515-cbc80e4ece35?auto=format&fit=crop&w=1200&q=80',
+  运动户外:
+    'https://images.unsplash.com/photo-1519861531473-9200262188bf?auto=format&fit=crop&w=1200&q=80',
+}
 const favoriteText = computed(() =>
   product.value && userStore.isFavorite(product.value.id) ? '取消收藏' : '收藏商品',
 )
@@ -30,7 +40,9 @@ function handleFavorite() {
 
 <template>
   <section v-if="product" class="page-section detail-layout">
-    <div class="detail-image">{{ product.category.slice(0, 2) }}</div>
+    <div class="detail-image">
+      <img :src="product.image || categoryImages[product.category]" :alt="product.title" />
+    </div>
     <div class="detail-content">
       <p class="eyebrow">商品信息</p>
       <h1>{{ product.title }}</h1>

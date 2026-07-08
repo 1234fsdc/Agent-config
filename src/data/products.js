@@ -9,7 +9,8 @@ export const initialProducts = [
     description: '教材保存完整，适合期末复习和课后练习。',
     sellerName: '李同学',
     contact: '13800000001',
-    image: '',
+    image:
+      'https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=900&q=80',
     ownerId: 'seed-user',
   },
   {
@@ -22,7 +23,8 @@ export const initialProducts = [
     description: '续航正常，配件齐全，日常听课和运动都可以使用。',
     sellerName: '王同学',
     contact: '13800000002',
-    image: '',
+    image:
+      'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80',
     ownerId: 'seed-user',
   },
   {
@@ -35,7 +37,8 @@ export const initialProducts = [
     description: '可放电脑和书本，适合宿舍床上学习使用。',
     sellerName: '张同学',
     contact: '13800000003',
-    image: '',
+    image:
+      'https://images.unsplash.com/photo-1616627451515-cbc80e4ece35?auto=format&fit=crop&w=900&q=80',
     ownerId: 'seed-user',
   },
   {
@@ -48,7 +51,8 @@ export const initialProducts = [
     description: '拍线状态良好，适合日常体育课和课余运动。',
     sellerName: '陈同学',
     contact: '13800000004',
-    image: '',
+    image:
+      'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=900&q=80',
     ownerId: 'seed-user',
   },
   {
@@ -61,7 +65,8 @@ export const initialProducts = [
     description: '整理了组件、路由、状态管理等基础知识点。',
     sellerName: '周同学',
     contact: '13800000005',
-    image: '',
+    image:
+      'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=900&q=80',
     ownerId: 'seed-user',
   },
   {
@@ -74,7 +79,8 @@ export const initialProducts = [
     description: '亮度可调，适合晚上学习使用。',
     sellerName: '赵同学',
     contact: '13800000006',
-    image: '',
+    image:
+      'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=80',
     ownerId: 'seed-user',
   },
 ]
