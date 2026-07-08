@@ -1,5 +1,6 @@
 <script setup>
 import { MapPin } from 'lucide-vue-next'
+import { ref } from 'vue'
 
 defineProps({
   product: {
@@ -8,22 +9,23 @@ defineProps({
   },
 })
 
-const categoryImages = {
-  书籍资料:
-    'https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=900&q=80',
-  电子数码:
-    'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80',
-  生活用品:
-    'https://images.unsplash.com/photo-1616627451515-cbc80e4ece35?auto=format&fit=crop&w=900&q=80',
-  运动户外:
-    'https://images.unsplash.com/photo-1519861531473-9200262188bf?auto=format&fit=crop&w=900&q=80',
+const imageLoadFailed = ref(false)
+
+function handleImageError() {
+  imageLoadFailed.value = true
 }
 </script>
 
 <template>
   <router-link class="product-card" :to="`/products/${product.id}`">
     <div class="product-image">
-      <img :src="product.image || categoryImages[product.category]" :alt="product.title" />
+      <img
+        v-if="product.image && !imageLoadFailed"
+        :src="product.image"
+        :alt="product.title"
+        @error="handleImageError"
+      />
+      <div v-else class="product-image-empty">&#26242;&#26080;&#22270;&#29255;</div>
       <span class="product-badge">{{ product.condition }}</span>
     </div>
     <div class="product-body">

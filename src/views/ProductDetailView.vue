@@ -9,18 +9,9 @@ const router = useRouter()
 const productStore = useProductStore()
 const userStore = useUserStore()
 const message = ref('')
+const imageLoadFailed = ref(false)
 
 const product = computed(() => productStore.getProductById(route.params.id))
-const categoryImages = {
-  书籍资料:
-    'https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1200&q=80',
-  电子数码:
-    'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
-  生活用品:
-    'https://images.unsplash.com/photo-1616627451515-cbc80e4ece35?auto=format&fit=crop&w=1200&q=80',
-  运动户外:
-    'https://images.unsplash.com/photo-1519861531473-9200262188bf?auto=format&fit=crop&w=1200&q=80',
-}
 const favoriteText = computed(() =>
   product.value && userStore.isFavorite(product.value.id) ? '取消收藏' : '收藏商品',
 )
@@ -36,12 +27,22 @@ function handleFavorite() {
   const result = userStore.toggleFavorite(product.value.id)
   message.value = result.message
 }
+
+function handleImageError() {
+  imageLoadFailed.value = true
+}
 </script>
 
 <template>
   <section v-if="product" class="page-section detail-layout">
     <div class="detail-image">
-      <img :src="product.image || categoryImages[product.category]" :alt="product.title" />
+      <img
+        v-if="product.image && !imageLoadFailed"
+        :src="product.image"
+        :alt="product.title"
+        @error="handleImageError"
+      />
+      <div v-else class="product-image-empty detail-image-empty">&#26242;&#26080;&#22270;&#29255;</div>
     </div>
     <div class="detail-content">
       <p class="eyebrow">商品信息</p>

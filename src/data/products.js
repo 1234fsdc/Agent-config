@@ -28,20 +28,6 @@ export const initialProducts = [
     ownerId: 'seed-user',
   },
   {
-    id: 'p-1003',
-    title: '宿舍折叠小桌',
-    category: '生活用品',
-    price: 25,
-    condition: '七成新',
-    location: '二食堂旁',
-    description: '可放电脑和书本，适合宿舍床上学习使用。',
-    sellerName: '张同学',
-    contact: '13800000003',
-    image:
-      'https://images.unsplash.com/photo-1616627451515-cbc80e4ece35?auto=format&fit=crop&w=900&q=80',
-    ownerId: 'seed-user',
-  },
-  {
     id: 'p-1004',
     title: '羽毛球拍一支',
     category: '运动户外',

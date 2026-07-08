@@ -99,6 +99,22 @@ export const useUserStore = defineStore('user', {
         message: exists ? '已取消收藏' : '收藏成功',
       }
     },
+    removeFavorite(productId) {
+      this.users = this.users.map((user) => ({
+        ...user,
+        favoriteIds: (user.favoriteIds ?? []).filter((id) => id !== productId),
+      }))
+
+      if (this.currentUser) {
+        this.currentUser = {
+          ...this.currentUser,
+          favoriteIds: (this.currentUser.favoriteIds ?? []).filter((id) => id !== productId),
+        }
+        this.persistCurrentUser()
+      }
+
+      this.persistUsers()
+    },
     isFavorite(productId) {
       return this.favoriteIds.includes(productId)
     },

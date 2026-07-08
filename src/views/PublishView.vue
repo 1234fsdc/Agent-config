@@ -18,7 +18,38 @@ const form = reactive({
   location: '',
   contact: '',
   description: '',
+  image: '',
 })
+
+function handleImageChange(event) {
+  const file = event.target.files?.[0]
+
+  if (!file) {
+    form.image = ''
+    return
+  }
+
+  if (!file.type.startsWith('image/')) {
+    message.value = '\u8bf7\u9009\u62e9\u56fe\u7247\u6587\u4ef6'
+    event.target.value = ''
+    form.image = ''
+    return
+  }
+
+  if (file.size > 2 * 1024 * 1024) {
+    message.value = '\u56fe\u7247\u5927\u5c0f\u4e0d\u80fd\u8d85\u8fc7 2MB'
+    event.target.value = ''
+    form.image = ''
+    return
+  }
+
+  const reader = new FileReader()
+  reader.onload = () => {
+    form.image = String(reader.result || '')
+    message.value = ''
+  }
+  reader.readAsDataURL(file)
+}
 
 function submitProduct() {
   if (!form.title.trim()) {
@@ -58,6 +89,7 @@ function submitProduct() {
     sellerName: currentUser.username,
     contact: form.contact.trim() || '请私下联系',
     ownerId: currentUser.id,
+    image: form.image,
   })
 
   message.value = '发布成功'
@@ -102,6 +134,16 @@ function submitProduct() {
       <label class="form-control">
         <span>商品描述</span>
         <textarea v-model="form.description" rows="4" placeholder="说明商品情况"></textarea>
+      </label>
+      <label class="form-control">
+        <span>&#21830;&#21697;&#22270;&#29255;</span>
+        <div class="image-upload">
+          <div class="image-preview">
+            <img v-if="form.image" :src="form.image" alt="product image preview" />
+            <span v-else>&#36873;&#25321;&#22270;&#29255;&#21518;&#26174;&#31034;&#39044;&#35272;</span>
+          </div>
+          <input type="file" accept="image/*" @change="handleImageChange" />
+        </div>
       </label>
       <button class="primary-button full-button" type="submit">发布商品</button>
       <p v-if="message" class="form-message">{{ message }}</p>

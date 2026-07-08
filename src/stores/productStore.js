@@ -3,10 +3,23 @@ import { initialProducts } from '../data/products'
 
 const PRODUCTS_KEY = 'campus_market_products'
 
+function normalizeProducts(products) {
+  return products.filter((product) => product.id !== 'p-1003')
+}
+
 function readProducts() {
   try {
     const value = localStorage.getItem(PRODUCTS_KEY)
-    return value ? JSON.parse(value) : initialProducts
+    if (!value) return initialProducts
+
+    const products = JSON.parse(value)
+    const normalizedProducts = normalizeProducts(products)
+
+    if (JSON.stringify(products) !== JSON.stringify(normalizedProducts)) {
+      writeProducts(normalizedProducts)
+    }
+
+    return normalizedProducts
   } catch {
     return initialProducts
   }
@@ -31,7 +44,7 @@ export const useProductStore = defineStore('product', {
       const newProduct = {
         ...product,
         id: `p-${Date.now()}`,
-        image: '',
+        image: product.image || '',
       }
 
       this.products.unshift(newProduct)
@@ -43,6 +56,16 @@ export const useProductStore = defineStore('product', {
     },
     getProductsByOwner(ownerId) {
       return this.products.filter((product) => product.ownerId === ownerId)
+    },
+    updateProduct(productId, values) {
+      this.products = this.products.map((product) =>
+        product.id === productId ? { ...product, ...values } : product,
+      )
+      this.persistProducts()
+    },
+    deleteProduct(productId) {
+      this.products = this.products.filter((product) => product.id !== productId)
+      this.persistProducts()
     },
     searchProducts({ keyword = '', category = '全部' }) {
       const normalizedKeyword = keyword.trim().toLowerCase()
