@@ -347,6 +347,54 @@ h1 {
   font-weight: 700;
 }
 
+.form-card,
+.profile-panel {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 22px;
+  border: 1px solid #dce5dc;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.form-control {
+  display: grid;
+  gap: 8px;
+  color: #34423b;
+  font-weight: 700;
+}
+
+.form-control textarea {
+  resize: vertical;
+}
+
+.full-button {
+  width: 100%;
+}
+
+.inline-link {
+  color: #1f5d3b;
+  font-weight: 700;
+}
+
+.nav-user {
+  color: #1f5d3b;
+  font-weight: 700;
+}
+
+.text-button {
+  border: 0;
+  padding: 0;
+  color: #52605a;
+  background: transparent;
+}
+
+.profile-panel {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
 @media (max-width: 720px) {
   .app-header {
     align-items: flex-start;
@@ -358,7 +406,8 @@ h1 {
   }
 
   .filter-bar,
-  .detail-layout {
+  .detail-layout,
+  .profile-panel {
     grid-template-columns: 1fr;
   }
 }
