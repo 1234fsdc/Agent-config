@@ -40,3 +40,8 @@ Word 试卷要求项目覆盖：
 3. Playwright 默认 Chromium 缓存不可用，但系统 Edge 渠道可用。
 4. favicon 缺失会导致浏览器控制台 404，已通过 `public/favicon.svg` 解决。
 
+## 最终交付发现
+
+1. 项目报告同时保留 Markdown 源稿和 Word 文档，便于后续修改和提交。
+2. 最终 zip 采用临时目录 staging 生成，避免误包含 `.git`、`node_modules` 和 `dist`。
+3. 压缩包内包含项目源码、文档、截图、报告和配置文件，可用于课程提交。

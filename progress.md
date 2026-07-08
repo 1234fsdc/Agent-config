@@ -67,10 +67,7 @@ feat/campus-market
 
 ### 当前剩余任务
 
-1. 编写项目报告。
-2. 再次检查页面和构建。
-3. 整理最终提交文件。
-4. 打包为 `202339070157沈凡栋前端框架技术期末项目.zip`。
+已完成当前目标要求，无剩余必做任务。
 
 ### 注意事项
 
@@ -79,3 +76,31 @@ feat/campus-market
 3. 后续报告应围绕“简单但完整”的前端项目说明。
 4. 每次继续工作前先读取 `task_plan.md` 和本文件。
 
+## 2026-07-08 继续执行记录
+
+### 已完成
+
+1. 根据 `docs/goal_prompt.md` 继续执行课程任务。
+2. 生成运行截图：
+   - `docs/report-assets/01-home.png`
+   - `docs/report-assets/02-products.png`
+   - `docs/report-assets/03-detail.png`
+   - `docs/report-assets/04-profile.png`
+3. 编写 Markdown 项目报告：`docs/project-report.md`。
+4. 生成 Word 项目报告：`202339070157沈凡栋前端框架技术期末项目报告.docx`。
+5. 生成最终压缩包：`202339070157沈凡栋前端框架技术期末项目.zip`。
+6. 更新 `task_plan.md`，将任务状态改为完成。
+
+### 验证记录
+
+1. `npm run build` 执行成功。
+2. `.docx` 报告检查通过：文件存在，大小约 381 KB，内部包含 `word/document.xml` 等 Word 文档结构。
+3. zip 检查通过：包含源码、文档、报告、截图、脚本和配置文件。
+4. zip 检查通过：未包含 `.git`、`node_modules`、`dist`。
+
+### 最终产物
+
+```text
+C:\Users\木\Desktop\proj_vue\202339070157沈凡栋前端框架技术期末项目.zip
+C:\Users\木\Desktop\proj_vue\202339070157沈凡栋前端框架技术期末项目报告.docx
+```
