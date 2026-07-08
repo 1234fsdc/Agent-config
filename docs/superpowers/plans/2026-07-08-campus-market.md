@@ -28,10 +28,14 @@
 - Create: `vite.config.js`
 - Create: `src/main.js`
 - Create: `src/App.vue`
+- Create: `src/router/index.js`
+- Create: `src/components/AppHeader.vue`
+- Create: `src/components/AppFooter.vue`
+- Create: `src/views/HomeView.vue`
 - Create: `src/styles/base.css`
 
 **Interfaces:**
-- Produces: a Vite app that mounts `#app`, registers Pinia and Vue Router, and renders `App.vue`.
+- Produces: a Vite app that mounts `#app`, registers Pinia and Vue Router, renders `App.vue`, and has a working `/` route.
 
 - [ ] **Step 1: Create project files**
 
@@ -39,7 +43,7 @@ Create a minimal Vite Vue project with dependencies `@vitejs/plugin-vue`, `vite`
 
 - [ ] **Step 2: Create base app shell**
 
-`App.vue` must render `AppHeader`, `<router-view />`, and `AppFooter`.
+`App.vue` must render `AppHeader`, `<router-view />`, and `AppFooter`. The initial router only needs the `/` route so the first build can pass.
 
 - [ ] **Step 3: Verify install and startup**
 
@@ -56,17 +60,17 @@ Expected: build finishes without errors.
 Run:
 
 ```bash
-git add package.json package-lock.json index.html vite.config.js src
+git add package.json package-lock.json index.html vite.config.js src docs/superpowers/plans/2026-07-08-campus-market.md
 git commit -m "chore: scaffold vue app"
 ```
 
 ### Task 2: Add Routes and Layout Components
 
 **Files:**
-- Create: `src/router/index.js`
-- Create: `src/components/AppHeader.vue`
-- Create: `src/components/AppFooter.vue`
-- Create: `src/views/HomeView.vue`
+- Modify: `src/router/index.js`
+- Modify: `src/components/AppHeader.vue`
+- Modify: `src/components/AppFooter.vue`
+- Modify: `src/views/HomeView.vue`
 - Create: `src/views/LoginView.vue`
 - Create: `src/views/RegisterView.vue`
 - Create: `src/views/ProductListView.vue`
@@ -304,4 +308,3 @@ Type consistency:
 2. Product lookup method is `getProductById`.
 3. Owner lookup method is `getProductsByOwner`.
 4. Favorite methods are `toggleFavorite` and `isFavorite`.
-
