@@ -115,6 +115,44 @@ h1 {
   line-height: 1.8;
 }
 
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.primary-link,
+.secondary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.primary-link {
+  color: #ffffff;
+  background: #1f5d3b;
+}
+
+.secondary-link {
+  color: #1f5d3b;
+  border: 1px solid #b7cbb8;
+  background: #ffffff;
+}
+
+.narrow-page {
+  max-width: 560px;
+}
+
+.muted-text {
+  color: #68776e;
+  line-height: 1.8;
+}
+
 @media (max-width: 720px) {
   .app-header {
     align-items: flex-start;
