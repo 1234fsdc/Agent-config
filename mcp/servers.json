@@ -1,34 +1,38 @@
 {
-  "//": "ZCode cli/config.json 的 mcp.servers 段模板。密钥已留空，恢复时填入或改用环境变量。exa 的 stdio.cjs 路径指向 exa 插件缓存（v3.3.10）。",
   "filesystem": {
     "command": "npx",
-    "args": ["-y", "@modelcontextprotocol/server-filesystem", "C:\\Users\\<用户名>"]
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-filesystem",
+      "<HOME>"
+    ]
   },
   "github": {
     "command": "npx",
-    "args": ["-y", "@modelcontextprotocol/server-github"],
-    "env": { "GITHUB_PERSONAL_ACCESS_TOKEN": "" }
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-github"
+    ],
+    "env": {
+      "GITHUB_PERSONAL_ACCESS_TOKEN": "<YOUR_GITHUB_PAT>"
+    }
   },
-  "git": {
-    "command": "npx",
-    "args": ["-y", "@cyanheads/git-mcp-server"]
-  },
-  "tavily": {
-    "command": "npx",
-    "args": ["-y", "tavily-mcp"],
-    "env": { "TAVILY_API_KEY": "" }
+  "codegraph": {
+    "command": "codegraph",
+    "args": [
+      "serve",
+      "--mcp"
+    ],
+    "note": "npm i -g codegraph"
   },
   "exa": {
     "command": "node",
-    "args": ["C:/Users/<用户名>/.zcode/cli/plugins/cache/claude-plugins-official/exa/3.3.10/dist/stdio.cjs"],
+    "args": [
+      "<LOCAL_EXA_MCP_PATH>"
+    ],
     "env": {
-      "EXA_API_KEY": "",
-      "ENABLED_TOOLS": "web_search_exa,web_search_advanced_exa,web_fetch_exa,agent_tools"
+      "EXA_API_KEY": "<YOUR_EXA_API_KEY>",
+      "ENABLED_TOOLS": "web_search_exa,web_fetch_exa,agent_tools"
     }
-  },
-  "graphify": {
-    "command": "C:\\Users\\<用户名>\\AppData\\Roaming\\uv\\tools\\graphifyy\\Scripts\\python.exe",
-    "args": ["-m", "graphify.serve"],
-    "env": { "GRAPHIFY_MAX_CONTEXTS": "16" }
   }
 }

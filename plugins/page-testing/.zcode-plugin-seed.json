@@ -1,0 +1,8 @@
+{
+  "hash": "page-testing-local-1.0.0",
+  "marketplace": "local",
+  "plugin": "page-testing",
+  "pluginVersion": "1.0.0",
+  "source": "filesystem",
+  "version": 1
+}

@@ -1,7 +1,7 @@
 ---
 name: competitor-analysis
 description: >
-  搜索功能。Analyze competitors with strengths, weaknesses, and differentiation opportunities. Identifies direct competitors and maps the competitive landscape. Use when doing competitive research, preparing a competitive brief, or finding differentiation opportunities.
+  对产品调研后给出一份完整竞品报告。Analyze competitors with strengths, weaknesses, and differentiation opportunities. Identifies direct competitors and maps the competitive landscape. Use when doing competitive research, preparing a competitive brief, or finding differentiation opportunities.
 ---
 
 # Competitor Analysis
