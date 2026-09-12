@@ -4,7 +4,7 @@ metadata:
   author: Z.AI
   version: "1.1"
 description: >
-  使用Python或pptxgenjs创建编辑演示文稿文件。creat and edit pptx file via pptxgenjs/python-pptx
+  使用Python或pptxgenjs创建编辑演示文稿文件。Create and edit pptx file via pptxgenjs/python-pptx
 license: Proprietary. LICENSE.txt has complete terms
 ---
 # Part 1 · Slide Design Best Practices
@@ -98,6 +98,7 @@ Build the palette on the **BACKGROUND → PRIMARY → ACCENT** model, and reuse 
   3. Then add text on top of the overlay
 - **Alternative (preferred):** instead of full-bleed images, place the image in a bounded region (e.g. the right half) and keep text in the other region on a solid background.
 - If an image is decorative, keep it small and positioned where it won't collide with text.
+- **Never stretch an image to fit** — when its aspect ratio doesn't match the target box, crop it (`sizing: { type: 'cover' }` or an explicit `crop`), never distort it by setting a `w`/`h` that breaks the ratio. This matters most on covers and full-bleed backgrounds, where a stretched photo is the most visible defect on the deck.
 - Test mentally: *"if I printed this slide in grayscale, could I still read every word?"*
 
 ## 6. Typography
@@ -120,6 +121,7 @@ Build the palette on the **BACKGROUND → PRIMARY → ACCENT** model, and reuse 
 - Leave breathing room — don't fill every inch
 
 ## 8. CJK fonts
+
 - **Name a face the viewer's PowerPoint actually ships**: 微软雅黑 / 等线 (Windows), 苹方 PingFang SC (macOS). A face that only exists on the build machine (Noto Sans SC, 思源黑体, LXGW 文楷 …) silently substitutes on the user's machine — use it only as the fallback, not the only name.
 - **Sans for the deck, serif for editorial weight**: 微软雅黑 / 苹方 for corporate, tech and data decks; 思源宋体 / 宋体 only for cultural, academic or heritage topics, and mainly on titles. **Never** use 楷体 / 行楷 / 隶书 / 艺术字体 for body text.
 - **Avoid Light/Thin CJK weights** — Chinese glyphs have far more strokes than Latin, so hairline weights turn to mud on a projector. Regular for body, Bold/Semibold for titles; build hierarchy with size and weight, not with a third face.
@@ -142,14 +144,14 @@ Build the palette on the **BACKGROUND → PRIMARY → ACCENT** model, and reuse 
 - 🚫 **Never add decorative color bars / accent stripes** — including full-width header/footer bands, vertical sidebar strips, thin colored strips along a card edge, and "single-side borders" on rectangles. To set a card apart, use a **subtle background tint or shadow**, not an edge stripe. In particular, never run the same edge-bar treatment on several consecutive slides
 - ❌ **Don't default to cream/beige backgrounds** — when unspecified, use white `FFFFFF` or your brand color; avoid warm-neutral defaults like `F5F5DC`, `FAF0E6`, `FAEBD7`, `FFF8E1`
 - ❌ **Don't let text overflow its shape** — if it doesn't fit, reduce the font, split across slides, or enlarge the container; never leave content cut off or spilling out
-
+- ❌ **Don't extra postprocess the east asia font if not needed**
 ## 10. QA (recommended)
 
 **Content QA:** check for missing content, typos, wrong order; when using a template, grep for leftover placeholders (`xxx`, `lorem`, `TODO`, `[insert`, etc.).
 
 **Code QA:** run a short `python-pptx` script over the finished deck to flag text overflow (estimated text height/width vs. the shape box, plus boxes outside the slide) and overlap (bounding-box intersection between two text-bearing shapes), then fix the real hits and re-run.
 
-Do not call external vlm to check slides for visual QA
+**Visual QA** once only: use pdftoppm to convert pptx2image and use judge subagent(if not exist,check it yourself) to check when neccesary. Do not call external vlm to check slides for visual QA
 
 ---
 
@@ -179,7 +181,6 @@ slide.addText("Hello World!", { x: M, y: M, w: W - 2 * M, fontSize: 36, color: "
 
 pres.writeFile({ fileName: "Presentation.pptx" }).then(() => console.log("done"));
 ```
-
 
 ## Layout dimensions
 
@@ -221,6 +222,8 @@ slide.addText([
 // Text-box padding: set margin: 0 to align with shapes/lines
 slide.addText("Title", { x: 0.5, y: 0.3, w: 9, h: 0.6, margin: 0 });
 ```
+
+> ⚠️ **Rich text arrays emit one `<a:pPr>` per run, not per paragraph.** Two or more consecutive items *without* `breakLine` land in the same `<a:p>`, each carrying its own `<a:pPr>` — which violates the `pPr? (r|br|fld)* endParaRPr?` schema. LibreOffice renders it fine, so a PDF preview will not catch it; PowerPoint paints the first frame correctly, then re-lays-out the paragraph and the line garbles. Two safe options: give every item `breakLine: true` (one run per paragraph), or, when you genuinely need mixed formatting inline, post-process the slide XML after `writeFile()` and drop every `<a:pPr>` after the first one inside each `<a:p>`. Do **not** fix it by splitting the runs into separate paragraphs — that silently turns one inline-mixed line into two lines and changes the layout you designed.
 
 ## Lists & bullets
 
@@ -340,6 +343,7 @@ slide.addImage({ path: "image.png", x: centerX, y: 1.2, w: calcW, h: maxH });
 Supports PNG / JPG / GIF / SVG (SVG works in modern PowerPoint / Microsoft 365).
 
 ## No `outEnd` labels on stacked bar charts
+
 OOXML restricts `c:dLblPos` by grouping: **stacked / percentStacked only allow
 `ctr` / `inBase` / `inEnd`** — `outEnd` is valid only for `clustered` (line: ctr/l/r/t/b;
 pie/doughnut: bestFit/ctr/inEnd/outEnd).
@@ -458,6 +462,7 @@ slide.addNotes("Open with the FY25 revenue headline; pause after the number. If 
    slide.addShape(pres.shapes.RECTANGLE, { shadow: makeShadow(), ... }); // ✅
    ```
 8. **Don't add edge accent bars to cards** — use a `fill` tint or `shadow` to set them apart
+9. **Rich text arrays emit one `<a:pPr>` per run** — two or more runs in a single paragraph produce duplicate, schema-invalid paragraph properties that only PowerPoint chokes on; see the note under "Text & formatting"
 
 ## Quick reference
 
